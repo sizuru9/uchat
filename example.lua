@@ -6,8 +6,8 @@ end
 function on_close(group)
 	print('disconnected from ' .. group.name);
 end
-function on_message(room, user, message)
-	print(room.name, user.name, message.body);
+function on_message(group, user, message)
+	print(group.name, user.name, message.body);
 end
 
 function on_connect_error(group, error)
