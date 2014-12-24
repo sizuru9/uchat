@@ -11,8 +11,6 @@ event = {};
 local map = {};
 
 -- LOCAL VARS --
-local _sockError;
-local count = 1;
 local host = 'ws://sv1.uchat.pw:443';
 local connected = false;
 
@@ -40,12 +38,16 @@ local function events(e, evt)
 	if e.bmsg ~= nil then
 		user['name'] = evt.un;
 		message['body'] = evt.msg;
-		event.on_message(group, user);
+		event.on_message(group, user, message);
 	end
 	if e.block ~= nil then
 		connected = false;
 	end
- end
+	if e.authdeny ~= nil then
+		group.disconnect();
+		print('bad login');
+	end
+end
 local function event_handle(data)
         local data = json.decode(data);
         local event = data['event'];
@@ -60,7 +62,7 @@ local function main()
 end		
 local function uchat_connect(resource)
 	local cl = ws.client.copas();
-	ok, _sockError = cl:connect(host, resource)
+	local ok, _sockError = cl:connect(host, resource)
 	if ok then
 		group['name'] = resource;
 		map[group.name] = cl;
