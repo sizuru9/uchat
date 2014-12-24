@@ -43,7 +43,7 @@ local function events(e, evt)
 	if e.block ~= nil then
 		connected = false;
 	end
-	if e.authdeny ~= nil then
+	if e.bauthdeny ~= nil then
 		group.disconnect();
 		print('bad login');
 	end
@@ -61,7 +61,7 @@ local function main()
 	end
 end		
 local function uchat_connect(resource)
-	local cl = ws.client.copas();
+	local cl = ws.client.sync();
 	local ok, _sockError = cl:connect(host, resource)
 	if ok then
 		group['name'] = resource;

@@ -16,7 +16,7 @@ end
 
 function init()
 	login['user'] = 'testaccount';
-	login['password'] = 'testaccount';
+	login['password'] = '9911324';
 	login['rooms'] = {'examplegroup'}
 	event['on_disconnect'] = on_close;
 	event['on_connect'] = on_connect;
